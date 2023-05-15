@@ -28,7 +28,7 @@ function Form({ inputs, onSubmit, action }: ComponentProps) {
         </div>
       ))}
       <div className='mt-10'>
-        <Button text={action} backgroundColor='purple' hasLeftSideArrow type='submit' />
+        <Button text={action} backgroundColor='purple' hasLeftSideArrow type='submit' onClick={onSubmit} />
       </div>
     </form>
   )

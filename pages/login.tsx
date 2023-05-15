@@ -1,10 +1,12 @@
 /* eslint-disable react/no-unescaped-entities */
 import Form from '@/components/Form'
+import axios from 'axios'
+import { useRouter } from 'next/router'
 import React, { useState } from 'react'
-import { useUser } from '@auth0/nextjs-auth0/client'
 
 function Login() {
   const [formData, setFormData] = useState({ email: '', password: '' })
+  const router = useRouter()
   const onChangeInput = (key: 'email' | 'password', e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target
     const value = target.value
@@ -12,8 +14,19 @@ function Login() {
     data[key] = value
     setFormData(data)
   }
-  const { user, error, isLoading } = useUser()
-
+  const loginUser = async (e: Event) => {
+    e.preventDefault()
+    try {
+      const res = await axios.post('http://localhost:8000/login', formData)
+      if (res.data.validate) {
+        router.push('/dashboard')
+        return
+      }
+      console.log('Oops! it looks like you have entered the wrong information. Please try again..')
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <div className='p-4 grid place-content-center min-h-screen'>
       <h1 className='text-2xl font-bold mb-4'>Let's Login</h1>
@@ -35,7 +48,7 @@ function Login() {
           },
         ]}
         action='Login'
-        onSubmit={() => console.log('het')}
+        onSubmit={loginUser}
       />
     </div>
   )
