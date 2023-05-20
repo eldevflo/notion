@@ -1,12 +1,15 @@
 /* eslint-disable react/no-unescaped-entities */
 import Form from '@/components/Form'
+import Toast from '@/components/Toast'
+import { ToastContext } from '@/context'
 import axios from 'axios'
 import { useRouter } from 'next/router'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 
 function Login() {
   const [formData, setFormData] = useState({ email: '', password: '' })
   const router = useRouter()
+  const toast = useContext(ToastContext)
   const onChangeInput = (key: 'email' | 'password', e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target
     const value = target.value
@@ -22,7 +25,10 @@ function Login() {
         router.push('/dashboard')
         return
       }
-      console.log('Oops! it looks like you have entered the wrong information. Please try again..')
+      toast?.show({
+        type: 'error',
+        message: 'Oops Looks like you entered the incorrect information!',
+      })
     } catch (error) {
       console.log(error)
     }

@@ -26,14 +26,16 @@ module.exports = {
       'green': '#60D889',
       'green-dark': '#1F7F40',
       'green-light': '#DAF6E4',
-      'error': '#CE3A54',
-      'error-strong' : '#5A1623',
+      'red': '#CE3A54',
+      'red-strong' : '#5A1623',
       'red-light': '#F7DEE3',
       'warning': '#F8C715',
       'warning-strong':'#725A03',
       'warning-light': '#FDEBAB',
       'white' : '#FFFFFF',
-      'transparent' : '#00000000'
+      'transparent' : '#00000000',
+      'error': '#FF5733',
+      'info': '#19A7CE'
     },
     fontWeight:{
       regular: '400',
