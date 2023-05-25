@@ -14,20 +14,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
-const mongodb_1 = require("mongodb");
-const uri = 'mongodb+srv://Elena:fzmnpr@cluster0.naxjlk1.mongodb.net/?retryWrites=true&w=majority';
-const client = new mongodb_1.MongoClient(uri);
+const dbConfig_1 = require("./config/dbConfig");
+const constants_1 = require("./constants");
+const user_1 = require("./routes/user");
 const app = (0, express_1.default)();
-const port = 8000;
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            yield client.connect();
+            yield dbConfig_1.client.connect();
             console.log('connected to database');
         }
         finally {
             // Ensures that the client will close when you finish/error
-            yield client.close();
+            yield dbConfig_1.client.close();
         }
     });
 }
@@ -38,27 +37,10 @@ app.use((req, res, next) => {
 app.use((0, cors_1.default)());
 //body purser
 app.use(express_1.default.json({ limit: '10mb' }));
-app.post('/login', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const { password, email } = req.body;
-        yield client.connect();
-        const database = client.db('Notion');
-        const users = database.collection('users');
-        const user = yield users.findOne({ email, password });
-        if (user) {
-            res.send(Object.assign(Object.assign({}, user), { id: user._id }));
-        }
-        else {
-            res.send(null);
-        }
-    }
-    finally {
-        client.close();
-    }
-}));
+app.use(user_1.userRouter);
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });
-app.listen(port, () => {
+app.listen(constants_1.port, () => {
     run();
 });

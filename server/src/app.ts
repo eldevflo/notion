@@ -1,12 +1,10 @@
 import express, { Request, Response } from 'express'
 import cors from 'cors'
-import { verbose, Database } from 'sqlite3'
-import { MongoClient } from 'mongodb'
-const uri = 'mongodb+srv://Elena:fzmnpr@cluster0.naxjlk1.mongodb.net/?retryWrites=true&w=majority'
-const client = new MongoClient(uri)
+import { client } from './config/dbConfig'
+import { port } from './constants'
+import { userRouter } from './routes/user'
 
 const app = express()
-const port = 8000
 
 async function run() {
   try {
@@ -17,7 +15,6 @@ async function run() {
     await client.close()
   }
 }
-
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*')
   next()
@@ -25,27 +22,7 @@ app.use((req, res, next) => {
 app.use(cors())
 //body purser
 app.use(express.json({ limit: '10mb' }))
-
-app.post('/login', async (req, res) => {
-  try {
-    const { password, email } = req.body
-    await client.connect()
-    const database = client.db('Notion')
-    const users = database.collection('users')
-
-    const user = await users.findOne({ email, password })
-    if (user) {
-      res.send({
-        ...user,
-        id: user._id,
-      })
-    } else {
-      res.send(null)
-    }
-  } finally {
-    client.close()
-  }
-})
+app.use(userRouter)
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello World!')
 })
