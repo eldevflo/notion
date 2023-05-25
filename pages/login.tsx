@@ -2,6 +2,8 @@
 import Form from '@/components/Form'
 import Toast from '@/components/Toast'
 import { ToastContext } from '@/context'
+import { userSlice } from '@/store/UserSlice'
+import { User } from '@/types/User'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import React, { useContext, useState } from 'react'
@@ -10,6 +12,10 @@ function Login() {
   const [formData, setFormData] = useState({ email: '', password: '' })
   const router = useRouter()
   const toast = useContext(ToastContext)
+  const { user, setUser } = userSlice()
+  if (user) {
+    router.push('/dashboard')
+  }
   const onChangeInput = (key: 'email' | 'password', e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target
     const value = target.value
@@ -21,8 +27,9 @@ function Login() {
     e.preventDefault()
     try {
       const res = await axios.post('http://localhost:8000/login', formData)
-      if (res.data.validate) {
+      if (res.data as User) {
         router.push('/dashboard')
+        setUser(res.data)
         return
       }
       toast?.show({

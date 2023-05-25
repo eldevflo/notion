@@ -42,4 +42,4 @@ next-env.d.ts
 **/public/workbox-*.js.map
 **/public/worker-*.js.map
 **/server/credentials.db
-**/server/dist
+**/server/dist/*

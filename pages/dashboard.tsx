@@ -2,9 +2,10 @@ import React from 'react'
 import image from '@/assets/images/getStarted.png'
 import Page from '@/components/Page'
 import Image from 'next/image'
+import PrivateRoute from '@/components/PrivateRoute'
 function dashboard() {
   return (
-    <Page>
+    <PrivateRoute>
       <>
         <Image src={image} alt='get started' />
         <h1 className='text-xl font-bold text-center mt-6'>Start Your Journey</h1>
@@ -21,7 +22,7 @@ function dashboard() {
           </svg>
         </div>
       </>
-    </Page>
+    </PrivateRoute>
   )
 }
 
