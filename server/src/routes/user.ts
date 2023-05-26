@@ -3,7 +3,7 @@ import { client } from '../config/dbConfig'
 import { dbName } from '../constants'
 export const userRouter = express.Router()
 
-userRouter.post('/login', async (req, res) => {
+userRouter.post('/user/login', async (req, res) => {
   try {
     const { password, email } = req.body
     await client.connect()
@@ -18,6 +18,26 @@ userRouter.post('/login', async (req, res) => {
     } else {
       res.send(null)
     }
+  } catch (err) {
+    res.send(err.message)
+  } finally {
+    client.close()
+  }
+})
+userRouter.post('/user/signup', async (req, res) => {
+  try {
+    const { password, email, username } = req.body
+    await client.connect()
+    const database = client.db(dbName)
+    const users = database.collection('users')
+    const user = await users.insertOne({ email, password, username })
+    if (user) {
+      res.send(user)
+    } else {
+      res.send(null)
+    }
+  } catch (err) {
+    res.status(205).send(err.message)
   } finally {
     client.close()
   }

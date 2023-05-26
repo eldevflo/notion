@@ -26,7 +26,7 @@ function Login() {
   const loginUser = async (e: Event) => {
     e.preventDefault()
     try {
-      const res = await axios.post('http://localhost:8000/login', formData)
+      const res = await axios.post('http://localhost:8000/user/login', formData)
       if (res.data as User) {
         router.push('/dashboard')
         setUser(res.data)
