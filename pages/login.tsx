@@ -1,10 +1,9 @@
 /* eslint-disable react/no-unescaped-entities */
 import Form from '@/components/Form'
-import Toast from '@/components/Toast'
 import { ToastContext } from '@/context'
-import { userSlice } from '@/store/UserSlice'
+import { userSlice } from '@/store/userSlice'
 import { User } from '@/types/User'
-import axios from 'axios'
+import { request } from '@/utils'
 import { useRouter } from 'next/router'
 import React, { useContext, useState } from 'react'
 
@@ -26,10 +25,14 @@ function Login() {
   const loginUser = async (e: Event) => {
     e.preventDefault()
     try {
-      const res = await axios.post('http://localhost:8000/user/login', formData)
+      const res = await request.post('/user/login', formData)
       if (res.data as User) {
         router.push('/dashboard')
         setUser(res.data)
+        toast?.show({
+          type: 'success',
+          message: 'You Logged in successfully.',
+        })
         return
       }
       toast?.show({

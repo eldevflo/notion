@@ -1,0 +1,1 @@
+export { userSlice } from './userSlice'

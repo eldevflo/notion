@@ -42,5 +42,5 @@ app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 app.listen(constants_1.port, () => {
-    run();
+    console.log(`server listening on port ${constants_1.port}`);
 });

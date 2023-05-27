@@ -1,4 +1,4 @@
-import { userSlice } from '@/store/UserSlice'
+import { userSlice } from '@/store/userSlice'
 import React, { useEffect } from 'react'
 import Page from '../Page'
 import { useRouter } from 'next/router'
