@@ -35,7 +35,8 @@ module.exports = {
       'white' : '#FFFFFF',
       'transparent' : '#00000000',
       'error': '#FF5733',
-      'info': '#19A7CE'
+      'info': '#19A7CE',
+      'gray-bg' : '#E5E5E5'
     },
     fontWeight:{
       regular: '400',

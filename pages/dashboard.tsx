@@ -3,7 +3,9 @@ import image from '@/assets/images/getStarted.png'
 import Page from '@/components/Page'
 import Image from 'next/image'
 import PrivateRoute from '@/components/PrivateRoute'
-function dashboard() {
+const wait = (ms:number) => new Promise((resolve, reject) => setTimeout(resolve, ms))
+ function dashboard() {
+  
   return (
     <PrivateRoute>
       <>

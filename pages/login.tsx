@@ -12,6 +12,7 @@ function Login() {
   const router = useRouter()
   const toast = useContext(ToastContext)
   const { user, setUser } = userSlice()
+  
   if (user) {
     router.push('/dashboard')
   }
