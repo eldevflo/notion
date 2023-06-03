@@ -6,8 +6,9 @@ import TabBar from '../TabBar'
 
 type Props = {
   children: JSX.Element | string
+  className?: string
 }
-function PrivateRoute({ children }: Props) {
+function PrivateRoute({ children , className }: Props) {
   const { user } = userSlice()
   const router = useRouter()
 
@@ -17,7 +18,7 @@ function PrivateRoute({ children }: Props) {
     }
   }, [])
   return (
-    <Page>
+    <Page className={className}>
       <>
         {children}
         <TabBar />

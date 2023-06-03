@@ -1,4 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+:root{
+    --primary: #6A3EA1
+}
 
+.ce-toolbar__plus svg path{
+    stroke: var(--primary);
+}
+.ce-toolbar__settings-btn svg path{
+    /* stroke: #19A7CE; */
+
+}
+#notes-editor h1 , #notes-editor h2, #notes-editor h3 , #notes-editor h4 , #notes-editor h5, #notes-editor h6{
+    font-weight: 600;
+}
+#notes-editor h1{
+    font-size: 32px;
+}
+#notes-editor h2{
+    font-size: 28px;
+}
+ #notes-editor h3 {
+    font-size: 25px;
+ }
+ #notes-editor h4{
+    font-size: 20px;
+ }
+ #notes-editor h5, #notes-editor h6{
+    font-size: 18px;
+ }

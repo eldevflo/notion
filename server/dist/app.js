@@ -22,7 +22,7 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             yield dbConfig_1.client.connect();
-            console.log('connected to database');
+            console.log("connected to database");
         }
         finally {
             // Ensures that the client will close when you finish/error
@@ -31,15 +31,18 @@ function run() {
     });
 }
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader("Access-Control-Allow-Origin", "*");
     next();
 });
 app.use((0, cors_1.default)());
 //body purser
-app.use(express_1.default.json({ limit: '10mb' }));
+app.use(express_1.default.json({ limit: "10mb" }));
 app.use(user_1.userRouter);
-app.get('/', (req, res) => {
-    res.send('Hello World!');
+app.get("/api/hi", () => {
+    console.log("hiiiiiiiiiii");
+});
+app.get("/", (req, res) => {
+    res.send("Hello World!");
 });
 app.listen(constants_1.port, () => {
     console.log(`server listening on port ${constants_1.port}`);

@@ -8,14 +8,14 @@ function TabBar() {
   const router = useRouter()
 
   return (
-    <div className='fixed bottom-0 w-full bg-white min-h-[84px] flex'>
-      <div className='flex justify-between w-full max-w-[500px] m-auto h-full p-3 cursor-pointer'>
+    <div className='fixed bottom-0 w-full bg-white min-h-[84px] flex border-t border-gray'>
+      <div className='flex justify-between w-full max-w-[500px] m-auto h-full p-3 '>
         <div className='flex'>
-          <span className='flex items-center flex-col mr-8'>
+          <button className='flex items-center flex-col mr-8'>
             <HomeIcon selected={router.pathname === 'dashboard'} />
             <span className={`${router.pathname === 'dashboard' ? 'text-purple' : ''}`}>Home</span>
-          </span>
-          <span className='flex items-center flex-col'>
+          </button>
+          <button className='flex items-center flex-col'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               fill='none'
@@ -31,9 +31,10 @@ function TabBar() {
               />
             </svg>
             <span className={`${router.pathname === 'finished' ? 'text-purple' : ''}`}>Finished</span>
-          </span>
+          </button>
         </div>
-        <div className='w-14 h-14 bg-purple flex items-center justify-center rounded-full absolute -top-[60%] right-[50%] translate-y-[50%] translate-x-[50%]'>
+        {/* plus icon  */}
+        <button className='w-14 h-14 bg-purple flex items-center justify-center rounded-full absolute -top-[60%] right-[50%] translate-y-[50%] translate-x-[50%]' onClick={() => router.push('/notes/new')}>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             fill='none'
@@ -44,16 +45,16 @@ function TabBar() {
           >
             <path strokeLinecap='round' strokeLinejoin='round' d='M12 4.5v15m7.5-7.5h-15' />
           </svg>
-        </div>
+        </button>
         <div className='flex'>
-          <span className='flex items-center flex-col mr-8'>
+          <button className='flex items-center flex-col mr-8'>
             <SearchIcon selected={router.pathname === 'search'} />
             <span className={`${router.pathname === 'search' ? 'text-purple' : ''}`}>Search</span>
-          </span>
-          <span className='flex items-center flex-col'>
+          </button>
+          <button className='flex items-center flex-col'>
             <SettingIcon selected={router.pathname === 'settings'} />
             <span className={`${router.pathname === 'settings' ? 'text-purple' : ''}`}>Settings</span>
-          </span>
+          </button>
         </div>
       </div>
     </div>
