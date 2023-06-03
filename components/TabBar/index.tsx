@@ -3,6 +3,7 @@ import HomeIcon from '../icons/HomeIcon'
 import SearchIcon from '../icons/SearchIcon'
 import SettingIcon from '../icons/SettingIcon'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 function TabBar() {
   const router = useRouter()
@@ -11,10 +12,10 @@ function TabBar() {
     <div className='fixed bottom-0 w-full bg-white min-h-[84px] flex border-t border-gray'>
       <div className='flex justify-between w-full max-w-[500px] m-auto h-full p-3 '>
         <div className='flex'>
-          <button className='flex items-center flex-col mr-8'>
+          <Link href='/dashboard' className='flex items-center flex-col mr-8'>
             <HomeIcon selected={router.pathname === 'dashboard'} />
             <span className={`${router.pathname === 'dashboard' ? 'text-purple' : ''}`}>Home</span>
-          </button>
+          </Link>
           <button className='flex items-center flex-col'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
