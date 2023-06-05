@@ -3,7 +3,6 @@ import { userSlice } from '@/store/userSlice'
 import { Inter } from 'next/font/google'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-Inter({ subsets: ['latin'] })
 
 export default function Home() {
   const { user } = userSlice()

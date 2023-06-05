@@ -1,4 +1,4 @@
-import Toast from '@/components/Toast'
+import Toast from '@/components/Ui/toast'
 import { Html, Head, Main, NextScript } from 'next/document'
 
 export default function Document() {

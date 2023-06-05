@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import Form from '@/components/Form'
+import Form from '@/components/Ui/form'
 import { ToastContext } from '@/context'
 import { userSlice } from '@/store/userSlice'
 import { User } from '@/types/User'

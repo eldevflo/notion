@@ -1,8 +1,8 @@
 import { userSlice } from '@/store/userSlice'
 import React, { useEffect } from 'react'
-import Page from '../Page'
+import Page from '../page'
 import { useRouter } from 'next/router'
-import TabBar from '../TabBar'
+import TabBar from '../tabBar'
 
 type Props = {
   children: JSX.Element | string

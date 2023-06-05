@@ -1,44 +1,44 @@
-import express from 'express'
-import { client } from '../config/dbConfig'
-import { dbName } from '../constants'
-export const userRouter = express.Router()
+import express from "express";
+import { client } from "../config/dbConfig";
+import { dbName } from "../constants";
+export const userRouter = express.Router();
 
-userRouter.post('/user/login', async (req, res) => {
+userRouter.post("/api/user/login", async (req, res) => {
   try {
-    const { password, email } = req.body
-    await client.connect()
-    const database = client.db(dbName)
-    const users = database.collection('users')
-    const user = await users.findOne({ email, password })
+    const { password, email } = req.body;
+    await client.connect();
+    const database = client.db(dbName);
+    const users = database.collection("users");
+    const user = await users.findOne({ email, password });
     if (user) {
       res.send({
         ...user,
         id: user._id,
-      })
+      });
     } else {
-      res.send(null)
+      res.send(null);
     }
   } catch (err) {
-    res.send(err.message)
+    res.send(err.message);
   } finally {
-    client.close()
+    client.close();
   }
-})
-userRouter.post('/user/signup', async (req, res) => {
+});
+userRouter.post("/api/user/signup", async (req, res) => {
   try {
-    const { password, email, username } = req.body
-    await client.connect()
-    const database = client.db(dbName)
-    const users = database.collection('users')
-    const user = await users.insertOne({ email, password, username })
+    const { password, email, username } = req.body;
+    await client.connect();
+    const database = client.db(dbName);
+    const users = database.collection("users");
+    const user = await users.insertOne({ email, password, username });
     if (user) {
-      res.send(user)
+      res.send(user);
     } else {
-      res.send(null)
+      res.send(null);
     }
   } catch (err) {
-    res.status(205).send(err.message)
+    res.status(205).send(err.message);
   } finally {
-    client.close()
+    client.close();
   }
-})
+});

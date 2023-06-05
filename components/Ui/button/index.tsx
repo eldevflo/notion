@@ -1,5 +1,5 @@
 import React from 'react'
-import ArrowRight from '../icons/ArrowRight'
+import ArrowRight from '../../icons/ArrowRight'
 const buttonWidths = {
   full: '328px',
   lg: '198px',

@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
 import image from '@/assets/images/welcome.png'
-import Button from '@/components/Button'
+import Button from '@/components/Ui/button'
 import { useRouter } from 'next/router'
 function WelcomePage() {
   const router = useRouter()

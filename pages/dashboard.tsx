@@ -1,8 +1,8 @@
 import React from 'react'
 import image from '@/assets/images/getStarted.png'
-import Page from '@/components/Page'
+import Page from '@/components/page'
 import Image from 'next/image'
-import PrivateRoute from '@/components/PrivateRoute'
+import PrivateRoute from '@/components/privateRoute'
 const wait = (ms:number) => new Promise((resolve, reject) => setTimeout(resolve, ms))
  function dashboard() {
   

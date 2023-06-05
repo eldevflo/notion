@@ -1,4 +1,4 @@
-import Toast from '@/components/Toast'
+import Toast from '@/components/Ui/toast'
 import { ToastContext } from '@/context'
 import { ToastProvider } from '@/context/ToastContext'
 import '@/styles/globals.css'

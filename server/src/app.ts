@@ -3,6 +3,7 @@ import cors from "cors";
 import { client } from "./config/dbConfig";
 import { port } from "./constants";
 import { userRouter } from "./routes/user";
+import { notesRouter } from "./routes/notes";
 
 const app = express();
 
@@ -23,9 +24,7 @@ app.use(cors());
 //body purser
 app.use(express.json({ limit: "10mb" }));
 app.use(userRouter);
-app.get("/api/hi", () => {
-  console.log("hiiiiiiiiiii");
-});
+app.use(notesRouter);
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello World!");
 });

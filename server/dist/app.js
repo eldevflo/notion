@@ -17,6 +17,7 @@ const cors_1 = __importDefault(require("cors"));
 const dbConfig_1 = require("./config/dbConfig");
 const constants_1 = require("./constants");
 const user_1 = require("./routes/user");
+const notes_1 = require("./routes/notes");
 const app = (0, express_1.default)();
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -38,9 +39,7 @@ app.use((0, cors_1.default)());
 //body purser
 app.use(express_1.default.json({ limit: "10mb" }));
 app.use(user_1.userRouter);
-app.get("/api/hi", () => {
-    console.log("hiiiiiiiiiii");
-});
+app.use(notes_1.notesRouter);
 app.get("/", (req, res) => {
     res.send("Hello World!");
 });

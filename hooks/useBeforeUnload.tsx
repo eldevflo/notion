@@ -1,9 +1,10 @@
 import { useCallback, useEffect } from 'react';
 
-const useBeforeUnload = (enabled: boolean | (() => boolean) | Promise<boolean> = true , message?: string , fn?: ()=>void) => {
+const useBeforeUnload = (enabled: boolean | (() => boolean) | Promise<boolean> = true , message?: string , fn?:Promise<void>) => {
   const handler = useCallback(
     async (event: BeforeUnloadEvent) => {
       const finalEnabled = typeof enabled === 'function' ? await enabled() : true;
+      const functionSigneture = await fn() || null
       if (!finalEnabled) {
         return;
       }
@@ -12,6 +13,9 @@ const useBeforeUnload = (enabled: boolean | (() => boolean) | Promise<boolean> =
 
       if (message) {
         event.returnValue = message;
+      }
+      if(fn){
+        event.returnValue = await fn();
       }
  
 
