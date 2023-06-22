@@ -18,6 +18,7 @@ const dbConfig_1 = require("./config/dbConfig");
 const constants_1 = require("./constants");
 const user_1 = require("./routes/user");
 const notes_1 = require("./routes/notes");
+const body_parser_1 = __importDefault(require("body-parser"));
 const app = (0, express_1.default)();
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -37,12 +38,12 @@ app.use((req, res, next) => {
 });
 app.use((0, cors_1.default)());
 //body purser
-app.use(express_1.default.json({ limit: "10mb" }));
+app.use(body_parser_1.default.json());
+app.use(body_parser_1.default.urlencoded({
+    extended: true,
+}));
 app.use(user_1.userRouter);
 app.use(notes_1.notesRouter);
-app.get("/", (req, res) => {
-    res.send("Hello World!");
-});
 app.listen(constants_1.port, () => {
     console.log(`server listening on port ${constants_1.port}`);
 });

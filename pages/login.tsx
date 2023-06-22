@@ -1,11 +1,12 @@
 /* eslint-disable react/no-unescaped-entities */
+
 import Form from '@/components/Ui/form'
 import { ToastContext } from '@/context'
 import { userSlice } from '@/store/userSlice'
 import { User } from '@/types/User'
 import { request } from '@/utils'
 import { useRouter } from 'next/router'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 function Login() {
   const [formData, setFormData] = useState({ email: '', password: '' })
@@ -13,9 +14,12 @@ function Login() {
   const toast = useContext(ToastContext)
   const { user, setUser } = userSlice()
   
-  if (user) {
+  useEffect(() => {
+    if (user !== 'unAuthorized') {
     router.push('/dashboard')
   }
+  }, [user])
+  
   const onChangeInput = (key: 'email' | 'password', e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target
     const value = target.value

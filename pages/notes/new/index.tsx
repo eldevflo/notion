@@ -14,7 +14,8 @@ const EditorBlock = dynamic(() => import("@/components/editor"), {
 
 const New:NextPage = ()=> {
     const [data, setData] = useState<OutputData>();    
-
+    console.log(data);
+    
   return (
     <>
       <NotesHeader title="New Note"/>
