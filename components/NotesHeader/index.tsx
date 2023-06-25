@@ -1,9 +1,11 @@
+import { useRouter } from 'next/router'
 import React from 'react'
 
-function NotesHeader({title}:{title:string}) {
+function NotesHeader({title , saveData}:{title:string , saveData: <Promise>()=>void}) {
+  const router = useRouter()
   return (
-    <div className="bg-white p-4 border-b  border-gray flex">
-        <button className="text-purple flex items-center">
+    <div className="bg-white p-4 border-b  border-gray flex justify-between">
+        <button className="text-purple flex items-center" onClick={()=>router.back()}>
           <span className="mr-2">
             {" "}
             <svg
@@ -23,7 +25,10 @@ function NotesHeader({title}:{title:string}) {
           </span>{" "}
           <span>back</span>
         </button>
-        <div className=" text-base font-medium w-full text-center">{title}</div>
+        <div className=" text-base font-medium 
+         text-center">{title}</div>
+        <button className=" text-green font-medium 
+         text-center " onClick={()=>saveData()}>save</button>
       </div>
   )
 }

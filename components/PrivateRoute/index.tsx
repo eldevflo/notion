@@ -13,7 +13,7 @@ function PrivateRoute({ children , className }: Props) {
   const router = useRouter()
 
   useEffect(() => {
-    if (!user || user === 'unAuthorized') {
+    if (!user) {
       router.push('/login')
     }
   }, [])

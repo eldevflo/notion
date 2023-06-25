@@ -15,7 +15,7 @@ function Login() {
   const { user, setUser } = userSlice()
   
   useEffect(() => {
-    if (user !== 'unAuthorized') {
+    if (user) {
     router.push('/dashboard')
   }
   }, [user])
@@ -33,7 +33,7 @@ function Login() {
       const res = await request.post('/user/login', formData)
       if (res.data as User) {
         router.push('/dashboard')
-        setUser(res.data)
+        setUser(res.data.data)
         toast?.show({
           type: 'success',
           message: 'You Logged in successfully.',
@@ -46,6 +46,10 @@ function Login() {
       })
     } catch (error) {
       console.log(error)
+        toast?.show({
+        type: 'error',
+        message: 'Oops something went wrong!',
+      })
     }
   }
   return (

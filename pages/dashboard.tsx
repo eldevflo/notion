@@ -3,8 +3,13 @@ import image from '@/assets/images/getStarted.png'
 import Page from '@/components/page'
 import Image from 'next/image'
 import PrivateRoute from '@/components/privateRoute'
-const wait = (ms:number) => new Promise((resolve, reject) => setTimeout(resolve, ms))
- function dashboard() {
+import useSWR, { Fetcher } from 'swr'
+import { User } from '@/types/User'
+import { userSlice } from '@/store'
+
+
+function dashboard() {
+  const { user } = userSlice()
   
   return (
     <PrivateRoute>

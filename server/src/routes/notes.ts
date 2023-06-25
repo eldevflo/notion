@@ -1,23 +1,46 @@
 import express from "express";
 import { client } from "../config/dbConfig";
-import { dbName } from "../constants";
 // import { OutputData } from "@editorjs/editorjs";
+import { pool as db } from "../utils/database";
 
 export const notesRouter = express.Router();
-// export interface Request extends Express.Request {
-//   body: OutputData;
-// }
-// notesRouter.post("/api/notes/create", async (req: Request, res) => {
-//   try {
-//     const { blocks, time, version } = req.body;
-//     await client.connect();
-//     const database = client.db(dbName);
-//     const notes = database.collection("notes");
-//     notes.insertOne(req.body);
-//     console.log(req.body);
-//   } catch (err) {
-//     res.send(err.message);
-//   } finally {
-//     client.close();
-//   }
-// });
+export interface PostRequest extends Express.Request {
+  body: {
+    blocks: {
+      id: string;
+      type: string;
+      data: any;
+    }[];
+    user: string;
+  };
+}
+export interface GetRequest extends Express.Request {
+  body: {
+    user: string;
+  };
+}
+
+notesRouter.post("/api/notes/create", async (req: PostRequest, res) => {
+  const { blocks, user } = req.body;
+  const notes = [];
+  blocks.forEach((block) => {
+    notes.push([user, block.id, block.type, JSON.stringify(block.data)]);
+  });
+
+  db.query(`INSERT INTO notes (user_id , block_id, type, data) VALUES ? `, [
+    notes,
+  ])
+    .then(([rows, fieldsData]) => {
+      res.status(200).send({ data: rows[0] });
+    })
+    .catch((err) => res.status(402).send(err.message));
+});
+
+notesRouter.get("/api/notes", async (req: GetRequest, res) => {
+  const { user } = req.body;
+  db.execute(`SELECT * FROM notes WHERE user_id = "${user}`)
+    .then(([rows, fieldsData]) => {
+      res.status(200).send({ data: rows[0] });
+    })
+    .catch((err) => res.status(402).send(err.message));
+});

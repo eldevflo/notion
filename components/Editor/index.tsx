@@ -3,8 +3,9 @@ import React, { memo, useEffect, useRef } from "react";
 import EditorJS, { OutputData } from "@editorjs/editorjs";
 import { useRouter } from "next/router";
 import { request } from "@/utils";
-import useBeforeUnload from "@/hooks/useBeforeUnload";
 import { EDITOR_JS_TOOLS } from "./EditorTools";
+import { usePrevious } from "@uidotdev/usehooks";
+import useAutosave from "@/hooks/useAutoSave";
 
 type Props = {
   data?: OutputData;
@@ -19,12 +20,26 @@ function Editor({ data, onChange , createMode }: Props) {
   const sendDataToServer = async () => {
     if(!data || !data.blocks.length) return false;
     const url = `/api/notes/${createMode ? "create" : "update"}`
-    // const res = await request.post('/api/notes/create' , data)
+    // const res = await request.post('/notes/create' , data)
     console.log(data);
     
     return true;
   };
-// useBeforeUnload(true ,  'jolkjljljlk')
+  // const previousData = usePrevious(data);   
+  //   async function saveData(){
+  //     if(data && previousData === undefined){
+  //       console.log('hello');
+  //       const response = await request.post('/notes/create' , {
+  //         blocks: data.blocks,
+  //         user: '5'
+  //       })
+  //       console.log(response , data);
+        
+        
+  //     }
+  //   }
+  //   useAutosave(saveData)
+    
   useEffect(() => {
     //initialize editor if we don't have a reference
     if (!ref.current) {
