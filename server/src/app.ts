@@ -5,7 +5,7 @@ import { port } from "./constants";
 import { userRouter } from "./routes/user";
 import { notesRouter } from "./routes/notes";
 import bodyParser from "body-parser";
-import { pool as db } from "./utils/database";
+import { sequelize } from "./utils/database";
 const app = express();
 
 async function run() {
@@ -31,7 +31,14 @@ app.use(
 );
 app.use(userRouter);
 app.use(notesRouter);
-
-app.listen(port, () => {
-  console.log(`server listening on port ${port}`);
-});
+sequelize
+  .sync()
+  .then((result) => {
+    console.log(result);
+    app.listen(port, () => {
+      console.log(`server listening on port ${port}`);
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+  });

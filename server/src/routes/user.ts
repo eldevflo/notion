@@ -1,25 +1,30 @@
 import express from "express";
 import { client } from "../config/dbConfig";
+import { UserModel } from "../models/User";
 export const userRouter = express.Router();
-import { pool as db } from "../utils/database";
 
 userRouter.post("/api/user/login", async (req, res) => {
   const { password, email } = req.body;
-  db.execute(
-    `SELECT * FROM users WHERE email = '${email}' AND password = '${password}'`
-  )
-    .then(([rows, fieldsData]) => {
-      res.status(200).send({ data: rows[0] });
+  UserModel.findOne({
+    where: { email, password },
+  })
+    .then((user) => {
+      if (user) {
+        res.send(user.dataValues);
+      } else {
+        res.status(404).send("user not found");
+      }
     })
-    .catch((err) => res.status(402).send(err.message));
+    .catch((error) => {
+      console.log(error);
+      res.status(500).send(error.message);
+    });
 });
 userRouter.post("/api/user/signup", async (req, res) => {
   const { password, email, username } = req.body;
-  db.execute(
-    `INSERT INTO users (password, email, username) VALUES ("${password}" ," ${email}" , "${username}");`
-  )
-    .then(([rows, fieldsData]) => {
-      res.status(200).send({ data: rows[0] });
-    })
-    .catch((err) => res.status(402).send(err.message));
+  UserModel.create({ email: email, password: password, username }).then(
+    (result) => {
+      console.log(result);
+    }
+  );
 });

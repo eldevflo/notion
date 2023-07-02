@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -78,4 +77,22 @@
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
+    h1 {
+    @apply text-2xl;
+  }
+  h2 {
+    @apply text-xl;
+  }
+    h3 {
+    @apply text-lg;
+  }
+ 
+
+
+}
+ol , ul , menu{
+  list-style: auto;
+}
+h1, h2, h3, h4, h5, h6{
+  font-weight: bold;
 }

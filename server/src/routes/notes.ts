@@ -1,7 +1,10 @@
 import express from "express";
 import { client } from "../config/dbConfig";
+import { Notes } from "../models/Notes";
+import { UserModel } from "../models/User";
+import { Blocks } from "../models/Blocks";
 // import { OutputData } from "@editorjs/editorjs";
-import { pool as db } from "../utils/database";
+// import { pool as db } from "../utils/database";
 
 export const notesRouter = express.Router();
 export interface PostRequest extends Express.Request {
@@ -14,33 +17,76 @@ export interface PostRequest extends Express.Request {
     user: string;
   };
 }
-export interface GetRequest extends Express.Request {
-  body: {
-    user: string;
-  };
-}
 
 notesRouter.post("/api/notes/create", async (req: PostRequest, res) => {
   const { blocks, user } = req.body;
   const notes = [];
-  blocks.forEach((block) => {
-    notes.push([user, block.id, block.type, JSON.stringify(block.data)]);
-  });
+  // ** TODO: install sequalize to be able to get the id of the note
+  Notes.create({
+    userId: user,
+    data: blocks,
+  })
+    .then((note) => {
+      console.log(note);
+      // if (note) {
+      //   const noteId = note.dataValues.id;
+      //   Blocks.create({
+      //     noteId,
+      //     data: blocks,
+      //   })
+      //     .then((block) => {
+      //       console.log(block.dataValues);
+      //       res.send({
+      //         data : block.dataValues
+      //       })
+      //     })
+      //     .catch((error) => {
+      //       console.log(error);
+      //       res.send({ messene: 'creating block failed' })
+      //     });
+      // }
+      if (note) {
+        console.log(note.dataValues);
 
-  db.query(`INSERT INTO notes (user_id , block_id, type, data) VALUES ? `, [
-    notes,
-  ])
-    .then(([rows, fieldsData]) => {
-      res.status(200).send({ data: rows[0] });
+        res.send({
+          data: {
+            id: note.dataValues.id,
+            userId: note.dataValues.userId,
+            blocks: JSON.parse(note.dataValues.data),
+          },
+        });
+      }
     })
-    .catch((err) => res.status(402).send(err.message));
+    .catch((error) => {
+      console.log(error);
+      res.send({ message: "creating note failed" });
+    });
 });
 
-notesRouter.get("/api/notes", async (req: GetRequest, res) => {
-  const { user } = req.body;
-  db.execute(`SELECT * FROM notes WHERE user_id = "${user}`)
-    .then(([rows, fieldsData]) => {
-      res.status(200).send({ data: rows[0] });
+notesRouter.get("/api/notes", async (req, res) => {
+  const { userId } = req.query;
+  Notes.findAll({
+    where: {
+      userId,
+    },
+  })
+    .then((notes) => {
+      const getNotesList = () =>
+        notes.map((note) => {
+          return {
+            id: note.dataValues.id,
+            userId: note.dataValues.userId,
+            blocks: JSON.parse(note.dataValues.data),
+          };
+        });
+      if (notes) {
+        res.send({
+          data: getNotesList(),
+        });
+      }
     })
-    .catch((err) => res.status(402).send(err.message));
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send(err.message);
+    });
 });
