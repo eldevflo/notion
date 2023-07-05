@@ -5,8 +5,6 @@ import { OutputData } from "@editorjs/editorjs";
 import type { NextPage } from "next";
 import dynamic from "next/dynamic";
 import { useState } from "react";
-import useAutosave from "@/hooks/useAutoSave";
-import { usePrevious } from "@uidotdev/usehooks";
 import { ToastContext } from '@/context'
 import { request } from "@/utils";
 import { userSlice } from "@/store";
@@ -21,6 +19,8 @@ const New:NextPage = ()=> {
     const [data, setData] = useState<OutputData>(); 
   const toast = useContext(ToastContext)
   const { user  } = userSlice()
+  console.log(data);
+  
 
     async function saveData(){
         if(!data) {
@@ -30,11 +30,22 @@ const New:NextPage = ()=> {
           })
           return
         }
-        const response = await request.post('/notes/create' , {
+       try {
+         const response = await request.post('/notes/create' , {
           blocks: data.blocks,
           user: user?.id 
         })
-        console.log(response , data);
+         toast?.show({
+            type: "success",
+            message: 'data saved successfully'
+          })
+       } catch (error) {
+        console.log('Error saving data: ' + error);
+         toast?.show({
+            type: "error",
+            message: 'Oops! something went wrong'
+          })
+       }
     }
   return (
     <>

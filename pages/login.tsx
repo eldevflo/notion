@@ -5,6 +5,8 @@ import { ToastContext } from '@/context'
 import { userSlice } from '@/store/userSlice'
 import { User } from '@/types/User'
 import { request } from '@/utils'
+import { AxiosError } from 'axios'
+import Error from 'next/error'
 import { useRouter } from 'next/router'
 import React, { useContext, useEffect, useState } from 'react'
 
@@ -32,12 +34,12 @@ function Login() {
     try {
       const res = await request.post('/user/login', formData)
       if (res.data as User) {
-        router.push('/dashboard')
-        setUser(res.data.data)
+        setUser(res.data)
         toast?.show({
           type: 'success',
           message: 'You Logged in successfully.',
         })
+        router.push('/dashboard')
         return
       }
       toast?.show({
@@ -46,6 +48,14 @@ function Login() {
       })
     } catch (error) {
       console.log(error)
+      const err = error as AxiosError
+      if(err.response?.status === 404) {
+          toast?.show({
+          type: 'error',
+          message: 'Oops Looks like you entered the incorrect information!',
+        })
+        return
+      }
         toast?.show({
         type: 'error',
         message: 'Oops something went wrong!',

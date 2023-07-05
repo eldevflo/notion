@@ -9,7 +9,7 @@ function TabBar() {
   const router = useRouter()
 
   return (
-    <div className='fixed bottom-0 w-full bg-white min-h-[84px] flex border-t border-gray'>
+    <div className='fixed bottom-0 w-full bg-white min-h-[84px] flex border-t border-gray ml-[-16px]'>
       <div className='flex justify-between w-full max-w-[500px] m-auto h-full p-3 '>
         <div className='flex'>
           <Link href='/dashboard' className='flex items-center flex-col mr-8'>

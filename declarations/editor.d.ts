@@ -11,4 +11,3 @@ declare module "@editorjs/image";
 declare module "@editorjs/raw";
 declare module "@editorjs/marker";
 declare module "@editorjs/checklist";
-declare module "@uidotdev/usehooks";

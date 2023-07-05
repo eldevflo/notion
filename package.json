@@ -10,7 +10,6 @@
     "server": "cd server && ts-node src/app.ts"
   },
   "dependencies": {
-    "@editorjs/checklist": "^1.5.0",
     "@editorjs/code": "^2.7.0",
     "@editorjs/editorjs": "^2.27.0",
     "@editorjs/header": "^2.7.0",
@@ -57,7 +56,9 @@
   },
   "devDependencies": {
     "@auth0/nextjs-auth0": "^2.4.0",
+    "@editorjs/checklist": "^1.5.0",
     "@editorjs/quote": "^2.5.0",
+    "@shrutibalasa/tailwind-grid-auto-fit": "^1.1.0",
     "@types/express": "^4.17.17",
     "@types/node": "^18.15.11",
     "@types/react": "^18.2.8",
