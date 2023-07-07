@@ -20,31 +20,11 @@ export interface PostRequest extends Express.Request {
 
 notesRouter.post("/api/notes/create", async (req: PostRequest, res) => {
   const { blocks, user } = req.body;
-  const notes = [];
-  // ** TODO: install sequalize to be able to get the id of the note
   Notes.create({
     userId: user,
     data: blocks,
   })
     .then((note) => {
-      console.log(note);
-      // if (note) {
-      //   const noteId = note.dataValues.id;
-      //   Blocks.create({
-      //     noteId,
-      //     data: blocks,
-      //   })
-      //     .then((block) => {
-      //       console.log(block.dataValues);
-      //       res.send({
-      //         data : block.dataValues
-      //       })
-      //     })
-      //     .catch((error) => {
-      //       console.log(error);
-      //       res.send({ messene: 'creating block failed' })
-      //     });
-      // }
       if (note) {
         console.log(note.dataValues);
 
@@ -60,6 +40,30 @@ notesRouter.post("/api/notes/create", async (req: PostRequest, res) => {
     .catch((error) => {
       console.log(error);
       res.send({ message: "creating note failed" });
+    });
+});
+
+notesRouter.post("/api/notes/update", async (req, res) => {
+  const { blocks, noteId } = req.body;
+  Notes.update(
+    {
+      data: blocks,
+    },
+    {
+      where: {
+        id: noteId,
+      },
+    }
+  )
+    .then((note) => {
+      console.log(note);
+      res.send({
+        data: "updated successfully",
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+      res.send({ message: "updating  note failed" });
     });
 });
 

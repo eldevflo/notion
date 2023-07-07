@@ -49,9 +49,11 @@ const New:NextPage = ()=> {
     }
   return (
     <>
-      <NotesHeader title="New Note" saveData={saveData}/>
       <PrivateRoute className="block ">
-          <EditorBlock data={data} onChange={setData}  />
+      <>
+        <NotesHeader title="New Note" saveData={saveData}/>
+        <EditorBlock data={data} onChange={setData}  />
+      </>
       </PrivateRoute>
       
     </>

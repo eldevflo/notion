@@ -9,7 +9,7 @@ const buttonWidths = {
 export interface ComponentProps {
   hasLeftSideArrow?: boolean
   hasRightSideArrow?: boolean
-  backgroundColor: 'none' | 'white' | 'purple' | 'purple-dark' | 'gray' | 'purple-light' | 'dark-gray'
+  backgroundColor: 'none' | 'white' | 'purple' | 'purple-dark' | 'gray' | 'purple-light' | 'dark-gray' | 'primary'
   textColor?: 'white' | 'purple' | 'purple-dark' | 'black'
   border?: 'purple' | 'purple-dark' | 'black' | 'gray'
   text: string
@@ -28,7 +28,7 @@ function Button({
   onClick,
   type,
 }: ComponentProps) {
-  const className = `flex justify-center items-center h-[54px] rounded-full py-4 px-5 ${
+  const className = `flex justify-center items-center h-[54px] rounded-md py-4 px-5 ${
     hasLeftSideArrow ? 'flex-row-reverse' : ''
   } ${
     buttonWidth(width) +
@@ -114,5 +114,7 @@ const buttonBorderColor = (backgroundColor: ComponentProps['backgroundColor']) =
       return 'border-purple'
     case 'none':
       return 'bg-transparent'
+      case 'primary':
+        return 'bg-primary hover:bg-primary-foreground'
   }
 }
