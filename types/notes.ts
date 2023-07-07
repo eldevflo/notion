@@ -5,4 +5,5 @@ export type Note = {
   userId: number;
   block_id: string;
   blocks: OutputBlockData[];
+  title: string;
 };

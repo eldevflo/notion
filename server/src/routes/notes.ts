@@ -15,14 +15,16 @@ export interface PostRequest extends Express.Request {
       data: any;
     }[];
     user: string;
+    title: string;
   };
 }
 
 notesRouter.post("/api/notes/create", async (req: PostRequest, res) => {
-  const { blocks, user } = req.body;
+  const { blocks, user, title } = req.body;
   Notes.create({
     userId: user,
     data: blocks,
+    title,
   })
     .then((note) => {
       if (note) {
@@ -33,13 +35,14 @@ notesRouter.post("/api/notes/create", async (req: PostRequest, res) => {
             id: note.dataValues.id,
             userId: note.dataValues.userId,
             blocks: JSON.parse(note.dataValues.data),
+            title: note.dataValues.title,
           },
         });
       }
     })
     .catch((error) => {
       console.log(error);
-      res.send({ message: "creating note failed" });
+      res.status(402).send({ message: "creating note failed" });
     });
 });
 
@@ -77,12 +80,15 @@ notesRouter.get("/api/notes", async (req, res) => {
     .then((notes) => {
       const getNotesList = () =>
         notes.map((note) => {
+          console.log(note);
           return {
             id: note.dataValues.id,
             userId: note.dataValues.userId,
             blocks: JSON.parse(note.dataValues.data),
+            title: note.dataValues.title,
           };
         });
+
       if (notes) {
         res.send({
           data: getNotesList(),
