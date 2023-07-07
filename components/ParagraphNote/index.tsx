@@ -1,12 +1,10 @@
 import React from 'react'
 
-function ParagraphNode({text , heading}:{
+function ParagraphNode({text }:{
     text: string
-    heading?: string
 }) {
   return (
-    <div className='rounded-lg text-white bg-[#bcbeff40] h-[300px]	'>
-     
+    <div className=''>
       <div dangerouslySetInnerHTML={{
         __html: text
     }} className='text-black p-3'/>

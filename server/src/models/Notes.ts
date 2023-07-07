@@ -1,7 +1,6 @@
 import Sequelize from "sequelize";
 
 import { sequelize } from "../utils/database";
-import { UserModel } from "./User";
 export const Notes = sequelize.define("Notes", {
   userId: {
     type: Sequelize.INTEGER.UNSIGNED,
@@ -12,8 +11,12 @@ export const Notes = sequelize.define("Notes", {
       key: "id",
     },
   },
-  data: {
+  title: {
     type: Sequelize.STRING,
+    allowNull: false,
+  },
+  data: {
+    type: Sequelize.TEXT,
     get: function () {
       return JSON.parse(this.getDataValue("data"));
     },
