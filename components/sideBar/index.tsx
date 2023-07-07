@@ -6,7 +6,6 @@ import MenuIcon from "../Ui/icons/MenuIcon";
 
 function SideBar() {
   const [show, setShow] = useState(false);
-  console.log(show);
 
   return (
     <>

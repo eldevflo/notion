@@ -2,16 +2,17 @@
 import React, { memo, useEffect, useRef } from "react";
 import EditorJS, { OutputData } from "@editorjs/editorjs";
 import { EDITOR_JS_TOOLS } from "./EditorTools";
+import { log } from "console";
 
 type Props = {
   data?: OutputData;
-  onChange(val: OutputData): void;
-  createMode?: boolean;
+  onChange?: (val: OutputData)=> void;
 };
 const holder = "notes-editor";
 function Editor({ data, onChange }: Props) {
   //add a reference to editor
   const ref = useRef<EditorJS>();
+  
 
   useEffect(() => {
     //initialize editor if we don't have a reference
@@ -23,6 +24,7 @@ function Editor({ data, onChange }: Props) {
         data,
         async onChange(api, event) {
           const data = await api.saver.save();
+          if(!onChange)return
           onChange(data);
         },
       });

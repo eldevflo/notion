@@ -100,3 +100,25 @@ notesRouter.get("/api/notes", async (req, res) => {
       res.status(500).send(err.message);
     });
 });
+notesRouter.get("/api/note/id", async (req, res) => {
+  console.log(req.query);
+  const { id } = req.query;
+  if (id) {
+    Notes.findOne({
+      where: {
+        id: id,
+      },
+    })
+      .then((note) => {
+        res.status(200).send({
+          data: {
+            id: note.dataValues.id,
+            userId: note.dataValues.userId,
+            blocks: JSON.parse(note.dataValues.data),
+            title: note.dataValues.title,
+          },
+        });
+      })
+      .catch((error) => res.send({ error }));
+  }
+});
