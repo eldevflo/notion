@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { Notes } from "../models/Notes";
 import { PostRequest } from "../routes/notes";
-
+import { Op } from "sequelize";
 export function getNotesByUserId(
   userId: Request["query"]["userId"],
   res: Response
@@ -67,9 +67,41 @@ export function getNoteById(req: Request, res: Response) {
 }
 
 export function getNoteByQuery(
-  userId: Request["query"]["query"],
+  query: Request["query"]["query"],
   res: Response
-) {}
+) {
+  Notes.findAll({
+    where: {
+      title: {
+        [Op.like]: "%" + query + "%",
+      },
+    },
+  })
+    .then((notes) => {
+      const getNotesList = () =>
+        notes.map((note) => {
+          return {
+            id: note.dataValues.id,
+            userId: note.dataValues.userId,
+            blocks: JSON.parse(note.dataValues.data),
+            title: note.dataValues.title,
+          };
+        });
+      if (!notes.length) {
+        res.send({
+          data: [],
+        });
+        return;
+      }
+      res.send({
+        data: getNotesList(),
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send(err.message);
+    });
+}
 
 export function createNote(req: PostRequest, res: Response) {
   const { blocks, user, title } = req.body;
