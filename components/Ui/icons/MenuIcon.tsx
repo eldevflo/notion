@@ -11,7 +11,7 @@ function MenuIcon() {
     >
       <path
         fill-rule="evenodd"
-        clip-rule="evenodd"
+        clipRule="evenodd"
         d="M21 16L21 18L3 18L3 16L21 16ZM21 11L3 11L3 13L21 13L21 11ZM21 6L3 6L3 8L21 8L21 6Z"
         fill="#000000"
       />

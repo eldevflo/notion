@@ -1,12 +1,11 @@
 import React, { useState } from "react";
+import SearchBar from "../SearchBar";
 
 function Navigation() {
-  const [show, setShow] = useState(false);
-
   return (
     <nav className="h-16 flex items-center lg:items-stretch justify-end lg:justify-between bg-white shadow relative z-10">
-      <div className="hidden lg:flex w-full pr-6">
-        <div className="w-1/2 h-full hidden lg:flex items-center pl-6 pr-24">
+      <div className="flex w-full pr-6">
+        <div className=" h-full flex items-center pl-6 pr-24 w-full">
           <div className="relative w-full">
             <div className="text-gray-500 absolute ml-4 inset-0 m-auto w-4 h-4">
               <svg
@@ -26,11 +25,7 @@ function Navigation() {
                 <line x1={21} y1={21} x2={15} y2={15} />
               </svg>
             </div>
-            <input
-              className="border border-gray-100 focus:outline-none focus:border-indigo-700 rounded w-full text-sm text-gray-500 bg-gray-100 pl-12 py-2"
-              type="text"
-              placeholder="Search"
-            />
+           <SearchBar/>
           </div>
         </div>
       </div>

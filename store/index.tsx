@@ -1,1 +1,2 @@
-export { userSlice } from './userSlice'
+export { userSlice } from './UserSlice';
+export { notesSlice } from './NotesSlice';

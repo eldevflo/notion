@@ -34,6 +34,7 @@
     "eslint-config-next": "13.3.0",
     "express-openid-connect": "^2.14.0",
     "framer-motion": "^10.12.12",
+    "loadash": "^1.0.0",
     "lucide-react": "^0.236.0",
     "mysql2": "^3.4.0",
     "next": "13.3.0",

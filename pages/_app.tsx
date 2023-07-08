@@ -1,17 +1,15 @@
-import Toast from '@/components/Ui/toast'
-import { ToastContext } from '@/context'
-import { ToastProvider } from '@/context/ToastContext'
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
-import * as notifier from "codex-notifier";
+import Toast from "@/components/Ui/toast";
+import { ToastProvider } from "@/context/ToastContext";
+import "@/styles/globals.css";
+import type { AppProps } from "next/app";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <ToastProvider>
-      <>
-        <Toast />
-        <Component {...pageProps} />
-      </>
-    </ToastProvider>
-  )
+      <ToastProvider>
+        <>
+          <Toast />
+          <Component {...pageProps} />
+        </>
+      </ToastProvider>
+  );
 }
