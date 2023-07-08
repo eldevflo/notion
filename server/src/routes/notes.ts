@@ -37,7 +37,7 @@ notesRouter.get("/api/notes", async (req, res) => {
     getNotesByUserId(userId, res);
     return;
   }
-  getNoteByQuery(query, res);
+  getNoteByQuery(req.query, res);
 });
 notesRouter.get("/api/note/id", async (req, res) => getNoteById(req, res));
 notesRouter.post("/api/note/edit", async (req, res) => updateNote(req, res));

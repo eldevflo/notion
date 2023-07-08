@@ -66,15 +66,14 @@ export function getNoteById(req: Request, res: Response) {
   }
 }
 
-export function getNoteByQuery(
-  query: Request["query"]["query"],
-  res: Response
-) {
+export function getNoteByQuery(query: Request["query"], res: Response) {
+  const { userId, searchQuery } = query;
   Notes.findAll({
     where: {
       title: {
-        [Op.like]: "%" + query + "%",
+        [Op.like]: "%" + searchQuery + "%",
       },
+      id: userId,
     },
   })
     .then((notes) => {
