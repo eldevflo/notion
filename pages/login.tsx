@@ -2,11 +2,10 @@
 
 import Form from '@/components/Ui/form'
 import { ToastContext } from '@/context'
-import { userSlice } from '@/store/userSlice'
+import { userSlice } from '@/store'
 import { User } from '@/types/User'
 import { request } from '@/utils'
 import { AxiosError } from 'axios'
-import Error from 'next/error'
 import { useRouter } from 'next/router'
 import React, { useContext, useEffect, useState } from 'react'
 

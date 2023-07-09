@@ -13,9 +13,9 @@ function Toast() {
     message: '',
   }
   return (
-    <div className='absolute inset-0 h-5'>
+    <div className='absolute my-3 right-12 top-0  h-5 z-50 rounded-full min-w-[300px]'>
       {type === 'info' && (
-        <div className='flex p-4 mb-4 text-sm text-white bg-info' role='alert'>
+        <div className='flex p-4 mb-4 text-sm text-white bg-info rounded' role='alert'>
           <svg
             aria-hidden='true'
             className='flex-shrink-0 inline w-5 h-5 mr-3'
@@ -36,7 +36,7 @@ function Toast() {
         </div>
       )}
       {type === 'error' && (
-        <div className='flex p-4 text-sm text-white bg-error' role='alert'>
+        <div className='flex p-4 text-sm text-white bg-error rounded' role='alert'>
           <svg
             aria-hidden='true'
             className='flex-shrink-0 inline w-5 h-5 mr-3'
@@ -55,7 +55,7 @@ function Toast() {
         </div>
       )}
       {type === 'success' && (
-        <div className='flex p-4  text-sm text-white bg-green' role='alert'>
+        <div className='flex p-4  text-sm text-white bg-green rounded' role='alert'>
           <svg
             aria-hidden='true'
             className='flex-shrink-0 inline w-5 h-5 mr-3'
@@ -76,7 +76,7 @@ function Toast() {
         </div>
       )}
       {type === 'warning' && (
-        <div className='flex p-4 mb-4 text-sm text-white bg-warning' role='alert'>
+        <div className='flex p-4 mb-4 text-sm text-white bg-warning rounded' role='alert'>
           <svg
             aria-hidden='true'
             className='flex-shrink-0 inline w-5 h-5 mr-3'

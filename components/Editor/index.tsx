@@ -6,7 +6,7 @@ import { log } from "console";
 
 type Props = {
   data?: OutputData;
-  onChange?: (val: OutputData)=> void;
+  onChange: (val: OutputData)=> void;
 };
 const holder = "notes-editor";
 function Editor({ data, onChange }: Props) {
@@ -24,7 +24,6 @@ function Editor({ data, onChange }: Props) {
         data,
         async onChange(api, event) {
           const data = await api.saver.save();
-          if(!onChange)return
           onChange(data);
         },
       });

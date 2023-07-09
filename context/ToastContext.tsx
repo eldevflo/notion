@@ -20,7 +20,7 @@ export const ToastProvider = ({ children }: Props) => {
     setToast(toast)
     setTimeout(() => {
       remove()
-    }, 6000)
+    }, 3000)
   }
   const remove = () => {
     setToast(undefined)

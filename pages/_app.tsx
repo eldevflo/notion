@@ -6,10 +6,10 @@ import type { AppProps } from "next/app";
 export default function App({ Component, pageProps }: AppProps) {
   return (
       <ToastProvider>
-        <>
+        <div className="relative">
           <Toast />
           <Component {...pageProps} />
-        </>
+        </div>
       </ToastProvider>
   );
 }
