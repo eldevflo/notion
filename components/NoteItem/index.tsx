@@ -14,7 +14,7 @@ function NoteItem({ noteItem }: { noteItem: Note }) {
       {!!noteItem.blocks.length && (
         <div className=" rounded-lg  bg-card">
           <div className="bg-black rounded-tl-lg rounded-tr-lg p-3 min-h-[50px]">
-            <h3 className="text-base text-white">{noteItem.title}</h3>
+            {noteItem.title ? <h3 className="text-base text-white">{noteItem.title}</h3> : <h3 className="text-base text-muted opacity-50">No Title</h3>}
           </div>
           <div className="h-[400px] overflow-scroll pb-3 overflow-x-hidden border">
             {noteItem.blocks.map((block) => (
