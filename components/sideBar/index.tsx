@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import SideBarItem from "./SideBarItem";
 import Logo from "../Ui/icons/Logo";
 import MenuIcon from "../Ui/icons/MenuIcon";
-import SearchBar from "../SearchBar";
+import SearchBar from "../searchBar";
+import Profile from "../profile";
 
 function SideBar() {
   const [show, setShow] = useState(false);
@@ -12,6 +13,8 @@ function SideBar() {
     <>
       <div className="absolute lg:relative w-64 h-screen shadow bg-gray-100 hidden lg:block">
         {/* logo */}
+        <div className="h-full flex flex-col">
+
         <div className="h-16 w-full flex items-center px-5">
           <Logo />
           <h3 className="ml-2">Simple Notion</h3>
@@ -21,6 +24,10 @@ function SideBar() {
             <SideBarItem key={item.title} item={item} />
           ))}
         </ul>
+        <div className="mt-auto mb-3">
+        <Profile/>
+        </div>
+        </div>
       </div>
       {/*Mobile responsive sidebar*/}
       <div
@@ -42,9 +49,8 @@ function SideBar() {
           onClick={() => setShow(!show)}
         />
         <div className="absolute z-40 sm:relative w-64 md:w-96 shadow pb-4 bg-white  lg:hidden transition duration-150 ease-in-out h-full">
-          <div className="flex flex-col justify-between h-full w-full ">
-            <div>
-              <div className="h-16 w-full flex items-center px-5">
+          <div className="flex flex-col justify-between h-screen w-full ">
+              <div className=" w-full flex items-center px-5">
                 <Logo />
                 <h3 className="ml-2">Simple Notion</h3>
               </div>
@@ -54,9 +60,11 @@ function SideBar() {
                   <SideBarItem key={item.title} item={item} />
                 ))}
               </ul>
+              <div className="mt-auto mb-3">
+        <Profile/>
+        </div>
             </div>
           </div>
-        </div>
       </div>
       {/*Mobile responsive sidebar*/}
     </>
