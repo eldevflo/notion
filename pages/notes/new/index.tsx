@@ -6,7 +6,7 @@ import { useState } from "react";
 import { ToastContext } from "@/context";
 import { request } from "@/utils";
 import { userSlice } from "@/store";
-import NotesHeader from "@/components/NotesHeader";
+import NotesHeader from "@/components/notesHeader";
 import PrivateRoute from "@/components/PrivateRoute";
 
 // important that we use dynamic loading here

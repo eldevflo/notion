@@ -1,4 +1,4 @@
-import NotesHeader from "@/components/NotesHeader";
+import NotesHeader from "@/components/notesHeader";
 import PrivateRoute from "@/components/PrivateRoute";
 import { ToastContext } from "@/context";
 import { Note } from "@/types/notes";

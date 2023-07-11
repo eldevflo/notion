@@ -3,13 +3,11 @@ import React from "react";
 
 function CheckListNote({
   items,
-  setNote,
 }: {
   items: {
     text: string;
     checked: boolean;
   }[];
-  setNote: React.Dispatch<React.SetStateAction<Note>>;
 }) {
   return (
     <div>
@@ -19,7 +17,7 @@ function CheckListNote({
             <input
               type="checkbox"
               className="w-4 h-4 text-purple bg-purple border-purple rounded"
-              onChange={() => {}}
+              readOnly
             />
             <span className="pl-2">{item.text}</span>
           </div>
