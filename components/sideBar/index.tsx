@@ -28,7 +28,7 @@ function SideBar() {
             ))}
           </ul>
           <div className="mt-auto mb-3">
-            <Profile user={user} />
+            {/* <Profile user={user} /> */}
           </div>
         </div>
       </div>
@@ -69,7 +69,7 @@ function SideBar() {
               ))}
             </ul>
             <div className="mt-auto mb-3">
-              <Profile user={user} />
+              {/* <Profile user={user} /> */}
             </div>
           </div>
         </div>

@@ -3,7 +3,7 @@ import Sequelize from "sequelize";
 import { sequelize } from "../utils/database";
 export const UserModel = sequelize.define("User", {
   id: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.INTEGER.UNSIGNED,
     autoIncrement: true,
     allowNull: false,
     primaryKey: true,
@@ -23,7 +23,7 @@ export const UserModel = sequelize.define("User", {
     },
   },
   password: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING(255),
     allowNull: false,
     validate: {
       notEmpty: true,

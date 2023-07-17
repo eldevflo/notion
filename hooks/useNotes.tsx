@@ -10,7 +10,7 @@ export function useNotes( query?: string) {
   const {notes , setNotes} = notesSlice()
 
   async function getData() {
-    const response = await request.get(`/notes?userId=${user?.id}&query=${query || ""}`);
+    const response = await request.get(`/notes?userId=${user?.id}&q=${query || ""}`);
     const { data } = response;
     setNotes(data.data)
   }

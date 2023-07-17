@@ -3,14 +3,14 @@
 import Form from '@/components/Ui/form'
 import { ToastContext } from '@/context'
 import { userSlice } from '@/store'
-import { User } from '@/types/User'
+import { User, UserResponseType } from '@/types/User'
 import { request } from '@/utils'
 import { AxiosError } from 'axios'
 import { useRouter } from 'next/router'
 import React, { useContext, useEffect, useState } from 'react'
 
 function Login() {
-  const [formData, setFormData] = useState({ email: '', password: '' })
+  const [formData, setFormData] = useState({ email: '', password: '' , username: 'fateme' })
   const router = useRouter()
   const toast = useContext(ToastContext)
   const { user, setUser } = userSlice()
@@ -31,13 +31,16 @@ function Login() {
   const loginUser = async (e: Event) => {
     e.preventDefault()
     try {
-      const res = await request.post('/user/login', formData)
-      if (res.data as User) {
-        setUser(res.data)
+      const res: UserResponseType = await request.post('/user/login', formData)
+      console.log(res , res.data.token);
+      
+      if (res.data.user as User) {
+        setUser(res.data.user)
         toast?.show({
           type: 'success',
           message: 'You Logged in successfully.',
         })
+        // save token to cookie
         router.push('/dashboard')
         return
       }
