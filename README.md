@@ -44,7 +44,7 @@ this is a very simple notebook project inspired by notion.
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
-- [MySql] - Database
+- MySql - Database
 - [Express](https://expressjs.com/) - Server Framework
 - [Nextjs](https://nextjs.org/) - Web Framework
 - [NodeJs](https://nodejs.org/en/) - Server Environment
