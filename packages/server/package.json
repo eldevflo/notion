@@ -1,0 +1,31 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd src && ts-node app.ts"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "express-openid-connect": "^2.14.0",
+    "jsonwebtoken": "^9.0.1",
+    "mysql2": "^3.4.0",
+    "sequelize": "^6.32.1",
+    "sequelize-cli": "^6.6.1",
+    "sequelize-typescript": "^2.1.5",
+    "sqlite3": "^5.1.6",
+    "typescript": "5.0.4"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/express": "^4.17.17",
+    "@types/jsonwebtoken": "^9.0.2",
+    "@types/node": "^18.15.11"
+  },
+  "author": "",
+  "license": "ISC"
+}
