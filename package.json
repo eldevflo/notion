@@ -12,6 +12,7 @@
     "client": "npm run dev --workspace client",
     "dev": "concurrently -c \"#ff8375,#95bf47\" -n client,server  \"npm run client\" \"npm run server\""
   },
+  "homepage": "https://github.com/eldevflo/notion",
   "author": "",
   "license": "ISC"
 }
